@@ -23,7 +23,7 @@ public interface OrdersDAO {
 	/**
 	 * The method retrieves the categories in orders by a customer given the {@code customerID}
 	 * @param customerID the unique identifier of {@link Customer}
-	 * @return{@link List}of categories in the order.
+	 * @return{@link List} of categories in the order.
 	 */
 	public List<CategoriesPerCustomer> categoriesByCustomerID(int customerID);
 	

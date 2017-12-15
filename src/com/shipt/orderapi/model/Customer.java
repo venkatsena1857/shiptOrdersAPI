@@ -7,6 +7,12 @@ public class Customer {
 	private String customerAddress;
 	private String customerPhone;
 	
+	/**
+	 * @param customerID the unique identification of each customer
+	 * @param customerName name of customer
+	 * @param customerAddress address of the customer
+	 * @param customerPhone phone number of customer
+	 */
 	public Customer(int customerID, String customerName, String customerAddress, String customerPhone) {
 		super();
 		this.customerID = customerID;

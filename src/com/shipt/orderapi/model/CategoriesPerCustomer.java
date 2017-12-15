@@ -12,11 +12,11 @@ public class CategoriesPerCustomer {
     private double qunatityOrdered;
     
     /**
-     * @param customerID
-     * @param customerName
-     * @param categoryID
-     * @param categoryName
-     * @param qunatityOrdered
+     * @param customerID the unique identification of each customer
+     * @param customerName name  of each customer
+     * @param categoryID unique identifier for category of product purchased
+     * @param categoryName name of category of product 
+     * @param qunatityOrdered the quantity of product ordered by customer
      */
     public CategoriesPerCustomer(int customerID, String customerName, int categoryID,
         String categoryName, double qunatityOrdered) {

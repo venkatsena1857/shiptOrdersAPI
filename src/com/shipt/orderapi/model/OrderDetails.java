@@ -5,6 +5,11 @@ public class OrderDetails {
 	private int productID;
 	private double quantity;
 	
+	/**
+	 * @param orderID unique identifier of the order
+	 * @param productID unique identifier of the product
+	 * @param quantity the quantity of the products purchased
+	 */
 	public OrderDetails(int orderID, int productID, double quantity) {
 		super();
 		this.orderID = orderID;

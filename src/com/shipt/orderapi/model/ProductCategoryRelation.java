@@ -1,9 +1,17 @@
 package com.shipt.orderapi.model;
 
+/**
+ * @author venkata
+ *
+ */
 public class ProductCategoryRelation {
 	private int productID;
 	private int categoryID;
 
+	/**
+	 * @param productID unique identifier of product
+	 * @param categoryID unique identifier of category of product
+	 */
 	public ProductCategoryRelation(int productID, int categoryID) {
 		super();
 		this.productID = productID;

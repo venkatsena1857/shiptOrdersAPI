@@ -25,8 +25,8 @@ import com.shipt.orderapi.model.ProductsPerOrder;
 @Controller
 public class OrdersController {
 
-  String dateFormat = "yyyy-MM-dd";
-  SimpleDateFormat format = new SimpleDateFormat(dateFormat);
+  private final String dateFormat = "yyyy-MM-dd";
+  private final SimpleDateFormat format = new SimpleDateFormat(dateFormat);
 
   private final String orderID = "Order ID";
   private final String orderDate = "Order Date";
@@ -37,7 +37,6 @@ public class OrdersController {
   private final String productName = "Product Name";
   private final String productPrice = "Product Price";
   private final String productSoldInParts = "Is the Product Sold in Parts";
-  private final String productDetails = "productDetails";
 
   /**
    * @param customerID the unique identifier of {@link Customer}
@@ -71,17 +70,18 @@ public class OrdersController {
         product_details.put(productName, current_products.get(j).getProductName());
         product_details.put(productPrice, current_products.get(j).getProductCost());
         product_details.put(productSoldInParts, current_products.get(j).isProductSoldInParts());
-        orderJson.put(productDetails, product_details);
+        String product_count = "Product" + String.valueOf(j + 1);
+        orderJson.put(product_count, product_details);
       }
-      
+
       orderList.add(orderJson);
     }
 
     return orderList;
   }
-  
-  
-  
+
+
+
   /**
    * @param customerID the unique identifier of {@link Customer}
    * @return the list of categories ordered by a given customer
@@ -90,7 +90,8 @@ public class OrdersController {
   @SuppressWarnings("unchecked")
   @ResponseBody
   @RequestMapping(value = "/CategoriesAPI/{customerID}", method = RequestMethod.GET)
-  public JSONArray getCustomerCategories(@PathVariable("customerID") int customerID) throws Exception {
+  public JSONArray getCustomerCategories(@PathVariable("customerID") int customerID)
+      throws Exception {
 
     JSONArray orderList = new JSONArray();
     OrdersDAOImplementation orderDAOImpl = new OrdersDAOImplementation();
@@ -99,12 +100,12 @@ public class OrdersController {
 
     for (int i = 0; i < categoryList.size(); i++) {
       JSONObject orderJson = new JSONObject();
-      orderJson.put("customerID", categoryList.get(i).getCustomerID()); 
+      orderJson.put("customerID", categoryList.get(i).getCustomerID());
       orderJson.put("customerName", categoryList.get(i).getCategoryName());
       orderJson.put("CategoryID", categoryList.get(i).getCategoryID());
       orderJson.put("CategoryName", categoryList.get(i).getCategoryName());
       orderJson.put("Quantity_Ordered", categoryList.get(i).getQunatityOrdered());
-      
+
       orderList.add(orderJson);
     }
 

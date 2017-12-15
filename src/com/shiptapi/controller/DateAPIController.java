@@ -37,13 +37,14 @@ public class DateAPIController {
   private final String quantitesOrdered = "Quantities Ordered";
   private final String productID = "Product ID";
   private final String date = "Date";
+  private final String datePattern = "yyyy-MM-dd";
 
   private enum frequency {
     WEEKLY, MONTHLY, DAILY
   };
 
   private final int incrementByOne = 1;
-  String datePattern = "yyyy-MM-dd";
+
   SimpleDateFormat format = new SimpleDateFormat(datePattern);
 
 
@@ -70,31 +71,34 @@ public class DateAPIController {
     }
     FileWriter writeFile = null;
     if (orderFrequency.equalsIgnoreCase(frequency.WEEKLY.toString())) {
-      try{
+      try {
         writeFile = new FileWriter("E:\\ordersByWeekly.csv");
-        writeFile.write(orderID+","+customerID+","+quantitesOrdered+","+productID+","+"weekOf");
-      } catch(Exception e) {
+        writeFile.write(orderID + "," + customerID + ", " + quantitesOrdered + ", " + productID
+            + ", " + "weekOf");
+      } catch (Exception e) {
         System.out.println(e.getMessage().toString());
       }
     }
     if (orderFrequency.equalsIgnoreCase(frequency.MONTHLY.toString())) {
-      try{
+      try {
         writeFile = new FileWriter("E:\\ordersByMonthly.csv");
-        writeFile.write(orderID+","+customerID+","+quantitesOrdered+","+productID+","+"monthOf");
+        writeFile.write(orderID + ", " + customerID + ", " + quantitesOrdered + ", " + productID
+            + ", " + "monthOf");
 
-        } catch(Exception e) {
-          System.out.println(e.getMessage().toString());
-        }
+      } catch (Exception e) {
+        System.out.println(e.getMessage().toString());
+      }
     }
     if (orderFrequency.equalsIgnoreCase(frequency.DAILY.toString())) {
-      try{
+      try {
         writeFile = new FileWriter("E:\\ordersByDaily.csv");
-        writeFile.write(orderID+","+customerID+","+quantitesOrdered+","+productID+","+date);
-        } catch(Exception e) {
-          System.out.println(e.getMessage().toString());
-        }
+        writeFile.write(
+            orderID + "," + customerID + ", " + quantitesOrdered + ", " + productID + ", " + date);
+      } catch (Exception e) {
+        System.out.println(e.getMessage().toString());
+      }
     }
-    
+
     Map<String, List<OrderByDates>> productsByFrequency =
         getProductsByFrequency(orderFrequency, startDate, endDate);
 
@@ -104,7 +108,6 @@ public class DateAPIController {
       Map.Entry frequencyOrderPair = (Map.Entry) iterator.next();
       String breakdownKey = null;
       ArrayList<OrderByDates> ordersList = (ArrayList<OrderByDates>) frequencyOrderPair.getValue();
-
       for (int i = 0; i < ordersList.size(); i++) {
         String orderDate = format.format(ordersList.get(i).getDate());
         JSONObject eachOrderJson = new JSONObject();
@@ -125,11 +128,11 @@ public class DateAPIController {
         }
         eachFrequencyJson.add(eachOrderJson);
         writeFile.write(System.getProperty("line.separator"));
-        String writeTOCsV= eachOrderJson.get(orderID).toString()+","
-                          +eachOrderJson.get(customerID).toString()+","
-                          +eachOrderJson.get(quantitesOrdered).toString()+","
-                          +eachOrderJson.get(productID).toString()+","
-                          +frequencyOrderPair.getKey().toString();
+        String writeTOCsV =
+            eachOrderJson.get(orderID).toString() + "," + eachOrderJson.get(customerID).toString()
+                + "," + eachOrderJson.get(quantitesOrdered).toString() + ","
+                + eachOrderJson.get(productID).toString() + ","
+                + frequencyOrderPair.getKey().toString();
         writeFile.append(writeTOCsV);
       }
       if (ordersList.size() > 0) {

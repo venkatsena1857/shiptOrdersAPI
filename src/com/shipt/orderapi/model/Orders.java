@@ -21,7 +21,7 @@ public class Orders {
 	 * The constructor for {@link Orders}
 	 * @param orderID the unique identifier for {@link Orders}. 
 	 * @param orderDate the date on which the order was placed
-	 * @param status the status of the order. This {@link OrderStatus} can have values {ON_THE_WAY, DELIVERED, SHIPPED}
+	 * @param status the status of the order. This {@link OrderStatus} can have values {ON_THE_WAY, DELIVERED, DELIVERED}
 	 * @param customerID the unique identifier for {@link Customer}
 	 * @param totalAmount the price of the order.
 	 */
